@@ -3,238 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>江南與魔都 5日雙城休閒旅</title>
+    <title>江南與魔都 5日職人美學之旅</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* 自定義滾動條與平滑滾動 */
         html { scroll-behavior: smooth; }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
         .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .timeline-dot { width: 12px; height: 12px; border: 2px solid white; box-shadow: 0 0 0 2px #3b82f6; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+<body class="bg-[#fdfdfd] text-slate-700 font-sans leading-relaxed">
 
     <nav class="sticky top-0 bg-white/90 backdrop-blur-md shadow-sm z-50">
-        <div class="max-w-5xl mx-auto px-4">
+        <div class="max-w-4xl mx-auto px-6">
             <div class="flex items-center justify-between h-16">
-                <span class="font-bold text-xl tracking-wider text-slate-700">✈️ 雙城漫遊 2024</span>
-                <div class="flex space-x-1 sm:space-x-4 overflow-x-auto text-sm sm:text-base">
-                    <button class="nav-btn px-3 py-2 text-blue-600 border-b-2 border-blue-600 font-medium" data-target="overview">總覽</button>
-                    <button class="nav-btn px-3 py-2 text-slate-500 hover:text-blue-600 font-medium" data-target="itinerary">每日行程</button>
-                    <button class="nav-btn px-3 py-2 text-slate-500 hover:text-blue-600 font-medium" data-target="food">美食地圖</button>
-                    <button class="nav-btn px-3 py-2 text-slate-500 hover:text-blue-600 font-medium" data-target="prep">行前準備</button>
+                <span class="font-bold text-lg tracking-wider text-slate-800">✈️ 雙城美學散策 4.08-4.12</span>
+                <div class="flex space-x-2 sm:space-x-6 overflow-x-auto text-sm font-medium">
+                    <button class="nav-btn text-blue-600 border-b-2 border-blue-600 pb-1 px-2" data-target="overview">總覽</button>
+                    <button class="nav-btn text-slate-400 hover:text-slate-600 transition px-2" data-target="itinerary">詳細行程</button>
+                    <button class="nav-btn text-slate-400 hover:text-slate-600 transition px-2" data-target="food">美食與散步</button>
+                    <button class="nav-btn text-slate-400 hover:text-slate-600 transition px-2" data-target="prep">行前準備</button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-5xl mx-auto px-4 py-8">
+    <main class="max-w-4xl mx-auto px-6 py-12">
 
         <section id="overview" class="tab-content active">
-            <h1 class="text-3xl font-bold mb-6">江南靜謐與魔都質感：5日雙城休閒旅</h1>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                    <h2 class="text-xl font-bold mb-4 border-b pb-2">📋 基本資訊</h2>
-                    <ul class="space-y-3 text-slate-600">
-                        <li>🗓️ <strong>日期：</strong> 4/8 - 4/12 (5天4夜)</li>
-                        <li>👥 <strong>人數：</strong> 2人</li>
-                        <li>📍 <strong>路線：</strong> 廈門 ➔ 上海 ➔ 諸暨 (住宿) ➔ 杭州 ➔ 上海 (住宿)</li>
-                        <li>💰 <strong>預算：</strong> 30,000 TWD (約 6,700 RMB) *不含機票</li>
-                        <li>🏨 <strong>住宿安排：</strong> 前2晚住諸暨朋友家，後2晚入住房價適中的上海市區設計酒店 (建議徐匯區或靜安區)。</li>
-                    </ul>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                    <h2 class="text-xl font-bold mb-4 border-b pb-2">📊 預算分配預估 (RMB)</h2>
-                    <div class="relative h-48 w-full flex justify-center">
-                        <canvas id="budgetChart"></canvas>
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="flex-1">
+                    <h1 class="text-4xl font-bold text-slate-900 mb-4">江南靜謐與魔都質感：5日休閒旅</h1>
+                    <p class="text-slate-500 mb-8 leading-relaxed">這是一場關於「材質」與「風味」的深度對話。避開嘈雜的觀光大景點，將時間留給西湖晨霧、隱秘茶園，以及魔都法租界裡最純粹的單品咖啡與最地道的老上海本幫菜。</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-slate-50 border border-slate-100 rounded-xl">
+                            <span class="block text-xs text-slate-400 uppercase tracking-widest mb-1">預算配置 (不含機票)</span>
+                            <span class="text-lg font-bold text-slate-800">30,000 TWD</span>
+                        </div>
+                        <div class="p-4 bg-slate-50 border border-slate-100 rounded-xl">
+                            <span class="block text-xs text-slate-400 uppercase tracking-widest mb-1">住宿策略</span>
+                            <span class="text-sm font-bold text-slate-800">如家neo (武康大樓店)</span>
+                            <p class="text-xs text-slate-500 mt-1">高性價比、地段絕佳</p>
+                        </div>
                     </div>
+                </div>
+                <div class="w-64 h-64 relative">
+                    <canvas id="budgetChart"></canvas>
                 </div>
             </div>
         </section>
 
         <section id="itinerary" class="tab-content">
-            <h2 class="text-2xl font-bold mb-6">🗺️ 每日行程時間軸</h2>
-            
-            <div class="mb-10">
-                <h3 class="text-xl font-bold text-blue-700 mb-4">Day 1：4/8 (三) 抵達魔都，轉乘江南</h3>
-                <div class="relative border-l-2 border-blue-200 ml-3 pl-6 space-y-6">
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-blue-500 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">09:50 - 12:05 ✈️ 廈門飛往上海</h4>
-                        <p class="text-sm text-slate-500 mt-1">交通：飛機 | 預估時間：2小時15分</p>
-                        <p class="text-sm mt-1">路線：廈門高崎機場 ➔ 上海浦東/虹橋機場</p>
-                    </div>
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-slate-300 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">13:30 - 15:00 🚄 搭乘高鐵前往諸暨</h4>
-                        <p class="text-sm text-slate-500 mt-1">交通：高鐵 (上海虹橋站 ➔ 諸暨站) | 預估時間：1.5小時</p>
-                        <a href="https://maps.app.goo.gl/uX3Lq6" target="_blank" class="text-blue-500 text-sm hover:underline">📍 諸暨火車站 (Google Maps)</a>
-                    </div>
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-slate-300 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">16:00 - 18:00 🏠 抵達諸暨朋友家放行李與休息</h4>
-                        <p class="text-sm text-slate-500 mt-1">停留時間：2小時</p>
-                    </div>
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-orange-400 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">18:30 - 21:00 🥢 漫步斯宅村或西施故里外圍與在地晚餐</h4>
-                        <p class="text-sm text-slate-500 mt-1">交通：計程車/朋友接送 | 停留時間：2.5小時</p>
-                        <p class="text-sm mt-1">避開過度開發的觀光區，享受寧靜的古建築與當地生活氣息，品嚐諸暨次塢打麵。</p>
-                        <a href="https://maps.app.goo.gl/abc123xyz" target="_blank" class="text-blue-500 text-sm hover:underline">📍 斯宅村千柱屋 (Google Maps)</a>
+            <div class="space-y-16">
+                
+                <div>
+                    <h2 class="text-2xl font-bold mb-8 border-l-4 border-blue-500 pl-4">Day 1 (4/8 週三) · 抵達與江南古味</h2>
+                    <div class="ml-2 border-l border-slate-200 pl-8 space-y-10">
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-blue-500 rounded-full"></div>
+                            <h3 class="font-bold text-lg">09:50 - 12:05 ✈️ 廈門飛往上海</h3>
+                            <p class="text-sm text-slate-500 mt-1">交通：飛機 | 路線：廈門高崎 ➔ 上海浦東/虹橋</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-slate-300 rounded-full"></div>
+                            <h3 class="font-bold text-lg">13:30 - 15:00 🚄 搭乘高鐵前往諸暨</h3>
+                            <p class="text-sm text-slate-500 mt-1">交通：高鐵 (上海虹橋站 ➔ 諸暨站) | 預估時間：1.5小時</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-slate-300 rounded-full"></div>
+                            <h3 class="font-bold text-lg">16:00 - 18:00 🏠 抵達諸暨朋友家</h3>
+                            <p class="text-sm text-slate-500 mt-1">放行李、稍作休息，洗去搭車的疲憊。</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-orange-400 rounded-full"></div>
+                            <h3 class="font-bold text-lg">18:30 - 21:00 🥢 斯宅村漫步與在地晚餐</h3>
+                            <p class="text-sm text-slate-500 mt-1">交通：計程車/朋友接送 | 停留時間：2.5小時</p>
+                            <p class="text-sm mt-1">避開過度開發的觀光區，造訪千柱屋，感受未經開發的木構工藝與安靜氛圍，晚餐品嚐諸暨次塢打麵。</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="mb-10">
-                <h3 class="text-xl font-bold text-blue-700 mb-4">Day 2：4/9 (四) 晨喚西湖與茶園秘境</h3>
-                <div class="relative border-l-2 border-blue-200 ml-3 pl-6 space-y-6">
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-slate-300 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">08:30 - 09:00 🚄 諸暨提早前往杭州</h4>
-                        <p class="text-sm text-slate-500 mt-1">交通：高鐵 (諸暨站 ➔ 杭州東站) | 預估時間：30分鐘</p>
-                    </div>
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-green-500 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">09:45 - 12:00 🚣‍♀️ 西湖蘇堤漫步與搖櫓船</h4>
-                        <p class="text-sm text-slate-500 mt-1">交通：地鐵轉計程車 | 停留時間：2小時15分</p>
-                        <p class="text-sm mt-1">趁早晨人少光線美，沿蘇堤散步並包一艘搖櫓船，從水面上欣賞最純粹的西湖靜謐感。</p>
-                        <a href="https://maps.app.goo.gl/def456xyz" target="_blank" class="text-blue-500 text-sm hover:underline">📍 西湖蘇堤 (Google Maps)</a>
-                    </div>
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-orange-400 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">12:30 - 14:00 🍽️ 茅家埠秘境午餐</h4>
-                        <p class="text-sm text-slate-500 mt-1">交通：計程車 | 停留時間：1.5小時</p>
-                        <p class="text-sm mt-1">往西湖西側深處走，來到茅家埠。這裡水草豐美、遊客稀少，找間沿湖農家樂品嚐道地杭幫菜。</p>
-                    </div>
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-green-500 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">14:30 - 17:00 🍃 龍井村茶園散步與質感咖啡</h4>
-                        <p class="text-sm text-slate-500 mt-1">交通：計程車 | 停留時間：2.5小時</p>
-                        <p class="text-sm mt-1">繼續深入山林抵達龍井村，在茶園中呼吸新鮮空氣。逛累了可以挑一間有質感的茶室或咖啡館，好好放空。</p>
-                        <a href="https://maps.app.goo.gl/abc123xyz3" target="_blank" class="text-blue-500 text-sm hover:underline">📍 龍井村 (Google Maps)</a>
-                    </div>
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-slate-300 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">19:00 🚄 返回諸暨休息</h4>
-                        <p class="text-sm text-slate-500 mt-1">交通：高鐵</p>
+                <div>
+                    <h2 class="text-2xl font-bold mb-8 border-l-4 border-blue-500 pl-4">Day 2 (4/9 週四) · 西湖晨光與茶山秘境</h2>
+                    <div class="ml-2 border-l border-slate-200 pl-8 space-y-10">
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-slate-300 rounded-full"></div>
+                            <h3 class="font-bold text-lg">08:30 - 09:00 🚄 諸暨提早前往杭州</h3>
+                            <p class="text-sm text-slate-500 mt-1">交通：高鐵 (諸暨站 ➔ 杭州東站) | 預估時間：30分鐘</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-green-500 rounded-full"></div>
+                            <h3 class="font-bold text-lg">09:45 - 12:00 🚣‍♀️ 西湖蘇堤漫步與搖櫓船</h3>
+                            <p class="text-sm text-slate-500 mt-1">交通：地鐵轉計程車 | 停留時間：2小時15分</p>
+                            <p class="text-sm mt-1">趁早晨人少光線最柔和，沿蘇堤散步並包一艘傳統搖櫓船，從水面上欣賞最純粹的西湖靜謐感。</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-orange-400 rounded-full"></div>
+                            <h3 class="font-bold text-lg">12:30 - 14:00 🍽️ 茅家埠秘境午餐</h3>
+                            <p class="text-sm text-slate-500 mt-1">交通：強烈建議呼叫滴滴打車 (約10分鐘) | 停留時間：1.5小時</p>
+                            <p class="text-sm mt-1">往西湖西側深處走，來到茅家埠。這裡水草豐美、遊客稀少，找間沿湖農家樂品嚐道地杭幫菜。</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-green-500 rounded-full"></div>
+                            <h3 class="font-bold text-lg">14:30 - 17:00 🍃 龍井村茶園散步與質感咖啡</h3>
+                            <p class="text-sm text-slate-500 mt-1">交通：強烈建議呼叫滴滴打車上山 (約15分鐘) | 停留時間：2.5小時</p>
+                            <p class="text-sm mt-1">免去爬山流汗，直接乘車抵達龍井村，在茶山間尋找安靜的咖啡角落或茶室，呼吸高品質的空氣。</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-slate-300 rounded-full"></div>
+                            <h3 class="font-bold text-lg">19:00 🚄 返回諸暨休息</h3>
+                            <p class="text-sm text-slate-500 mt-1">交通：高鐵</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="mb-10">
-                <h3 class="text-xl font-bold text-blue-700 mb-4">Day 3：4/10 (五) 諸暨晨喚與移轉魔都</h3>
-                <div class="relative border-l-2 border-blue-200 ml-3 pl-6 space-y-6">
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-green-500 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">08:30 - 10:00 🥟 諸暨在地晨間體驗：早市與特色早餐</h4>
-                        <p class="text-sm text-slate-500 mt-1">交通：步行/朋友接送 | 停留時間：1.5小時</p>
-                        <p class="text-sm mt-1">趁著還在諸暨的最後一個早晨，到在地傳統早市逛逛，品嚐糖秧、烤餃或生煎包等特色早餐，感受沒有觀光客的純粹生活氣息。</p>
-                    </div>
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-slate-300 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">10:30 - 12:00 🚄 告別諸暨，前往上海市區</h4>
-                        <p class="text-sm text-slate-500 mt-1">交通：高鐵 (諸暨站 ➔ 上海虹橋站) | 預估時間：1.5小時</p>
-                    </div>
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-indigo-400 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">12:30 - 13:30 🏨 抵達上海飯店 (寄放行李)</h4>
-                        <p class="text-sm text-slate-500 mt-1">交通：地鐵/計程車 | 停留時間：1小時</p>
-                    </div>
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-orange-400 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">14:00 - 18:00 🚶‍♂️ 安福路、武康路質感街區散步</h4>
-                        <p class="text-sm text-slate-500 mt-1">交通：步行 | 停留時間：4小時</p>
-                        <p class="text-sm mt-1">探索高品質獨立服飾店、香氛品牌店，感受高級面料與匠人手藝的氛圍，途中穿插頂級的手沖咖啡體驗。</p>
-                        <a href="https://maps.app.goo.gl/ghi789xyz" target="_blank" class="text-blue-500 text-sm hover:underline">📍 武康大樓周邊 (Google Maps)</a>
+                <div>
+                    <h2 class="text-2xl font-bold mb-8 border-l-4 border-blue-500 pl-4">Day 3 (4/10 週五) · 移轉魔都與梧桐散步</h2>
+                    <div class="ml-2 border-l border-slate-200 pl-8 space-y-10">
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-green-500 rounded-full"></div>
+                            <h3 class="font-bold text-lg">08:30 - 10:00 🥟 諸暨早市煙火氣</h3>
+                            <p class="text-sm text-slate-500 mt-1">交通：步行/朋友接送 | 停留時間：1.5小時</p>
+                            <p class="text-sm mt-1">到在地傳統早市逛逛，品嚐糖秧、烤餃等特色早餐，感受沒有觀光客的純粹生活氣息。</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-slate-300 rounded-full"></div>
+                            <h3 class="font-bold text-lg">10:30 - 12:00 🚄 告別諸暨，前往上海</h3>
+                            <p class="text-sm text-slate-500 mt-1">交通：高鐵 (諸暨站 ➔ 上海虹橋站) | 預估時間：1.5小時</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-indigo-500 rounded-full"></div>
+                            <h3 class="font-bold text-lg">12:30 - 13:30 🏨 入住 如家酒店·neo (武康大樓店)</h3>
+                            <p class="text-sm text-slate-500 mt-1">交通：地鐵/計程車 | 停留時間：1小時</p>
+                            <p class="text-sm mt-1">辦理入住並寄放行李。此地點優勢極大，下樓即是法租界散步路線的起點。</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-orange-400 rounded-full"></div>
+                            <h3 class="font-bold text-lg">14:00 - 18:00 🚶‍♂️ 安福路、武康路獨立職人小店巡禮</h3>
+                            <p class="text-sm text-slate-500 mt-1">交通：步行 | 停留時間：4小時</p>
+                            <p class="text-sm mt-1">探索梧桐樹下的獨立服飾品牌與咖啡館。晚餐直接步行至飯店旁的傳奇名店「老吉士」品嚐正宗本幫菜。</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="mb-10">
-                <h3 class="text-xl font-bold text-blue-700 mb-4">Day 4：4/11 (六) 現代藝術與老洋房街區</h3>
-                <div class="relative border-l-2 border-blue-200 ml-3 pl-6 space-y-6">
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-green-500 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">10:30 - 13:30 🖼️ 西岸美術館 (Centre Pompidou x West Bund)</h4>
-                        <p class="text-sm text-slate-500 mt-1">交通：地鐵/計程車 | 停留時間：3小時</p>
-                        <p class="text-sm mt-1">欣賞極簡與現代藝術，建築本身具有極高質感。</p>
-                        <p class="text-sm mt-1 text-red-500 font-bold">⚠️ 週末人潮眾多，強烈建議提前 3-7 天透過微信小程式「西岸美術館」預約購票，以防現場限流或排隊過久。</p>
-                        <a href="https://maps.app.goo.gl/jkl012xyz" target="_blank" class="text-blue-500 text-sm hover:underline">📍 西岸美術館 (Google Maps)</a>
-                    </div>
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-orange-400 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">15:00 - 18:00 🌳 愚園路歷史街區與質感小店漫遊</h4>
-                        <p class="text-sm text-slate-500 mt-1">交通：地鐵 | 停留時間：3小時</p>
-                        <p class="text-sm mt-1">取代了大型商場，這裡有著百年洋房、獨立設計師品牌、生活風格選物店與轉角咖啡館，充滿魔都獨有的文藝與在地生活氣息。</p>
-                        <a href="https://maps.app.goo.gl/3HhY1tQZfJpY3oN9A" target="_blank" class="text-blue-500 text-sm hover:underline">📍 愚園路 (Google Maps)</a>
-                    </div>
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-blue-500 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">19:30 - 21:30 🌃 外灘和平飯店周邊微醺</h4>
-                        <p class="text-sm mt-1">享受江景與高質感的調酒收尾。</p>
-                        <a href="https://maps.app.goo.gl/mno345xyz" target="_blank" class="text-blue-500 text-sm hover:underline">📍 外灘景觀區 (Google Maps)</a>
+                <div>
+                    <h2 class="text-2xl font-bold mb-8 border-l-4 border-blue-500 pl-4">Day 4 (4/11 週六) · 歷史泳池與老洋房街區</h2>
+                    <div class="ml-2 border-l border-slate-200 pl-8 space-y-10">
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-blue-500 rounded-full"></div>
+                            <h3 class="font-bold text-lg">10:30 - 14:00 🏛️ 上生·新所 (Columbia Circle)</h3>
+                            <p class="text-sm text-slate-500 mt-1">交通：地鐵/計程車 | 停留時間：3.5小時</p>
+                            <p class="text-sm mt-1">造訪充滿生活溫度的歷史建築群。這裡有絕美的復古噴泉泳池，以及進駐在老建築內的「蔦屋書店」。在這裡喝杯咖啡、翻翻書，享受毫無壓迫感的魔都慢生活。</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-orange-400 rounded-full"></div>
+                            <h3 class="font-bold text-lg">14:30 - 18:00 🌳 愚園路/巨富長 質感小店漫遊</h3>
+                            <p class="text-sm text-slate-500 mt-1">交通：地鐵 | 停留時間：3.5小時</p>
+                            <p class="text-sm mt-1">取代了大型商場，這裡有著百年洋房、獨立設計師品牌、生活風格選物店。晚餐可選擇「建國328小館」再次回味上海在地美味。</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-slate-900 rounded-full"></div>
+                            <h3 class="font-bold text-lg">19:30 - 21:30 🌃 外灘和平飯店周邊微醺</h3>
+                            <p class="text-sm mt-1">享受江景與高質感的調酒，為這趟旅程畫下完美的句點。</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="mb-10">
-                <h3 class="text-xl font-bold text-blue-700 mb-4">Day 5：4/12 (日) 踏上歸途</h3>
-                <div class="relative border-l-2 border-blue-200 ml-3 pl-6 space-y-6">
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-slate-300 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">04:30 - 05:30 🚕 計程車前往浦東機場</h4>
-                        <p class="text-sm text-slate-500 mt-1">交通：滴滴打車/計程車 | 預估時間：1小時</p>
-                        <p class="text-sm mt-1 text-red-500 font-medium">⚠️ 航班極早，請務必前一晚預約好送機服務。</p>
-                    </div>
-                    <div class="relative">
-                        <div class="absolute -left-[31px] bg-blue-500 h-4 w-4 rounded-full border-4 border-white"></div>
-                        <h4 class="font-bold text-lg">07:00 - 08:55 ✈️ 浦東機場飛往廈門</h4>
-                        <p class="text-sm text-slate-500 mt-1">路線：上海浦東機場 (PVG) ➔ 廈門高崎機場 (XMN)</p>
+                <div>
+                    <h2 class="text-2xl font-bold mb-8 border-l-4 border-blue-500 pl-4">Day 5 (4/12 週日) · 踏上歸途</h2>
+                    <div class="ml-2 border-l border-slate-200 pl-8 space-y-10">
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-slate-300 rounded-full"></div>
+                            <h3 class="font-bold text-lg">04:30 - 05:30 🚕 計程車前往浦東機場</h3>
+                            <p class="text-sm text-slate-500 mt-1">交通：滴滴打車/計程車 | 預估時間：1小時</p>
+                            <p class="text-sm mt-1 text-red-500 font-bold">⚠️ 航班極早，請務必前一天就透過滴滴或請飯店櫃檯預約好清晨的送機服務。</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1.5 timeline-dot bg-blue-500 rounded-full"></div>
+                            <h3 class="font-bold text-lg">07:00 - 08:55 ✈️ 浦東機場飛往廈門</h3>
+                            <p class="text-sm text-slate-500 mt-1">路線：上海浦東機場 (PVG) ➔ 廈門高崎機場 (XMN)</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="food" class="tab-content">
-            <h2 class="text-2xl font-bold mb-6">🍽️ 特色美食與質感咖啡地圖</h2>
             
-            <div class="flex space-x-3 mb-6">
-                <button class="filter-btn active bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium" data-filter="all">全部顯示</button>
-                <button class="filter-btn bg-slate-200 text-slate-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-300 transition" data-filter="coffee">精品咖啡/甜點</button>
-                <button class="filter-btn bg-slate-200 text-slate-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-300 transition" data-filter="local">在地小吃/麵食</button>
-                <button class="filter-btn bg-slate-200 text-slate-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-300 transition" data-filter="seafood">江浙本幫菜/河鮮</button>
+            <div class="mb-12 bg-slate-800 text-white p-8 rounded-2xl shadow-lg border border-slate-700">
+                <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+                    <span>🗺️</span> 梧桐區散步與本幫菜巡禮
+                </h3>
+                <p class="text-sm text-slate-300 mb-8 leading-relaxed">這條路線將精品咖啡、老洋房街區，與最傳奇的本幫菜老店完美結合。建議安排於 Day 3 抵達飯店後的午後時光。</p>
+                
+                <div class="space-y-6 pl-3 border-l border-slate-600 ml-2">
+                    <div class="relative pl-6">
+                        <div class="absolute -left-[25px] top-1.5 w-3 h-3 bg-blue-400 rounded-full shadow-[0_0_0_4px_rgba(96,165,250,0.2)]"></div>
+                        <h4 class="font-bold text-blue-300 text-base">📍 起點：如家 neo (武康大樓店)</h4>
+                        <p class="text-sm text-slate-400 mt-1.5">從飯店步行出發，直接進入法租界核心區，享受兩旁繁茂的梧桐樹影。</p>
+                    </div>
+                    <div class="relative pl-6">
+                        <div class="absolute -left-[25px] top-1.5 w-3 h-3 bg-slate-400 rounded-full"></div>
+                        <h4 class="font-bold text-base">☕ 第一站：魯馬滋咖啡 (Rumors)</h4>
+                        <p class="text-sm text-slate-400 mt-1.5">品嚐法蘭絨手沖的極致溫潤，感受微小空間裡的安靜張力與主理人的專注。</p>
+                    </div>
+                    <div class="relative pl-6">
+                        <div class="absolute -left-[25px] top-1.5 w-3 h-3 bg-slate-400 rounded-full"></div>
+                        <h4 class="font-bold text-base">🚶‍♂️ 漫步武康路與安福路</h4>
+                        <p class="text-sm text-slate-400 mt-1.5">沿途欣賞歷史老洋房，逛逛極具品味、重視天然面料的獨立設計師服飾店與香氛工作室。</p>
+                    </div>
+                    <div class="relative pl-6">
+                        <div class="absolute -left-[25px] top-1.5 w-3 h-3 bg-slate-400 rounded-full"></div>
+                        <h4 class="font-bold text-base">🍽️ 晚餐：老吉士 (天平路創始店) ⚠️ 必預約</h4>
+                        <p class="text-sm text-slate-400 mt-1.5">距離飯店僅幾步之遙！回到擁擠的老上海弄堂裡，品嚐最正宗的「蔥烤鰲花魚」與「外婆紅燒肉」，體驗極致的濃油赤醬。</p>
+                    </div>
+                    <div class="relative pl-6">
+                        <div class="absolute -left-[25px] top-1.5 w-3 h-3 bg-blue-400 rounded-full shadow-[0_0_0_4px_rgba(96,165,250,0.2)]"></div>
+                        <h4 class="font-bold text-blue-300 text-base">🌙 終點：散步 3 分鐘即抵達飯店</h4>
+                    </div>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="foodGrid">
+            <h2 class="text-2xl font-bold mb-6">🍽️ 咖啡與老上海美食地圖</h2>
+            
+            <div class="flex space-x-2 mb-8 overflow-x-auto pb-2">
+                <button class="filter-btn bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap shadow-sm" data-filter="all">全部顯示</button>
+                <button class="filter-btn bg-slate-100 text-slate-600 hover:bg-slate-200 transition px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-filter="benbang">道地本幫菜</button>
+                <button class="filter-btn bg-slate-100 text-slate-600 hover:bg-slate-200 transition px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-filter="coffee">精品單品咖啡</button>
+                <button class="filter-btn bg-slate-100 text-slate-600 hover:bg-slate-200 transition px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-filter="local">純粹在地小吃</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="foodGrid">
                 </div>
         </section>
 
         <section id="prep" class="tab-content">
             <h2 class="text-2xl font-bold mb-6">🎒 行前準備與實用建議</h2>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                <h3 class="font-bold text-lg mb-4 text-blue-600">必備手機 App (強烈建議在出發前下載並完成實名認證)</h3>
-                <ul class="list-disc pl-5 space-y-2 text-slate-700 mb-6">
-                    <li><strong>導航：</strong> 高德地圖 或 百度地圖 (Google Maps 雖已附連結，但當地精準度低，建議搭配使用)。</li>
-                    <li><strong>微信 (WeChat)：</strong> 不僅用於支付，更重要的是使用其「小程式」功能（如預約西岸美術館、掃碼點餐）。</li>
-                    <li><strong>支付：</strong> 支付寶 (Alipay)、微信 綁定台灣信用卡。</li>
-                    <li><strong>交通：</strong> 鐵路 12306 (買高鐵票)、滴滴出行 (內建於支付寶或微信小程序中叫車)。</li>
-                    <li><strong>生活：</strong> 大眾點評 (找美食、看真實評價)。</li>
-                </ul>
+            <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 space-y-6">
+                <div>
+                    <h3 class="font-bold text-blue-900 text-lg mb-2 flex items-center gap-2"><span>🛡️</span> 旅平險提醒 (必辦清單)</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-blue-800 text-sm">
+                        <li><strong>旅遊不便險：</strong> 強烈建議購買。回程 7:00 早班機風險高，若遇延誤/取消，不便險能完全涵蓋機場周邊重訂飯店或購買盥洗用品的額外開銷。</li>
+                        <li><strong>海外突發疾病醫療：</strong> 大陸自費醫療費用可觀，務必確認保單包含此項目，並將「保單電子檔」存放於手機中。</li>
+                    </ul>
+                </div>
+                
+                <hr class="border-blue-200">
 
-                <h3 class="font-bold text-lg mb-4 text-blue-600">網路與通訊</h3>
-                <p class="text-slate-700 mb-6">建議購買中港澳免翻牆 eSIM 網卡，確保順暢使用 Line、IG 等軟體。</p>
+                <div>
+                    <h3 class="font-bold text-blue-900 text-lg mb-2 flex items-center gap-2"><span>📱</span> 數位工具箱 (出發前下載認證)</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-blue-800 text-sm">
+                        <li><strong>導航：</strong> 高德地圖 (Amap) 或 百度地圖 (Google Maps 雖已附連結，但當地精準度低)。</li>
+                        <li><strong>微信 (WeChat)：</strong> 使用「小程式」功能掃碼點餐，或預約「老吉士」等熱門餐廳。</li>
+                        <li><strong>支付：</strong> 支付寶 (Alipay)、微信 綁定台灣信用卡。</li>
+                        <li><strong>交通：</strong> 滴滴出行 (內建於支付寶/微信)，處理西湖山區與清晨送機最方便。</li>
+                        <li><strong>生活：</strong> 大眾點評 (找隱秘小店、看真實評價與裝潢細節的神器)。</li>
+                    </ul>
+                </div>
 
-                <h3 class="font-bold text-lg mb-4 text-blue-600">打包建議</h3>
-                <ul class="list-disc pl-5 space-y-2 text-slate-700">
-                    <li>4月中江南天氣舒適但早晚偏涼，建議攜帶高質感、透氣的天然材質外套 (如輕薄羊毛或亞麻混紡) 應付溫差。</li>
-                    <li>一雙好走的休閒鞋，江南與上海都有許多適合步行的質感街區。</li>
-                </ul>
+                <hr class="border-blue-200">
+
+                <div>
+                    <h3 class="font-bold text-blue-900 text-lg mb-2 flex items-center gap-2"><span>🧥</span> 網路與打包建議</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-blue-800 text-sm">
+                        <li><strong>網路：</strong> 購買中港澳免翻牆 eSIM 網卡，確保順暢使用 Line、IG 等軟體。</li>
+                        <li><strong>衣著：</strong> 4月中江南早晚偏涼，建議攜帶高質感、透氣的天然材質外套 (如輕薄羊毛或亞麻混紡) 應付溫差。</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -247,16 +288,13 @@
 
         navBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // 重置所有按鈕樣式
                 navBtns.forEach(b => {
                     b.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
-                    b.classList.add('text-slate-500');
+                    b.classList.add('text-slate-400');
                 });
-                // 設置當前按鈕樣式
-                btn.classList.remove('text-slate-500');
+                btn.classList.remove('text-slate-400');
                 btn.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
 
-                // 切換內容區塊
                 const targetId = btn.getAttribute('data-target');
                 tabContents.forEach(content => {
                     if(content.id === targetId) {
@@ -268,14 +306,14 @@
             });
         });
 
-        // 2. 預算 Chart.js 圖表
+        // 2. 預算 Chart.js 圖表 
         const ctx = document.getElementById('budgetChart').getContext('2d');
         new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: ['雙人住宿 (上海2晚)', '交通 (高鐵/計程車)', '餐飲美食', '其他/雜支/娛樂'],
+                labels: ['住宿 (如家neo)', '交通 (高鐵/計程車)', '經典餐飲與咖啡', '其他/雜支/娛樂'],
                 datasets: [{
-                    data: [1500, 1200, 3000, 1000], // 總計 6700 RMB (約3萬台幣)
+                    data: [1000, 1500, 3200, 1000],
                     backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'],
                     borderWidth: 0
                 }]
@@ -284,19 +322,18 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { position: 'right' }
+                    legend: { display: false } 
                 }
             }
         });
 
-        // 3. 美食地圖數據與篩選邏輯
+        // 3. 餐廳數據與篩選邏輯 (已全面替換為道地本幫菜)
         const foodData = [
-            { id: 1, name: '次塢打麵 (諸暨)', category: 'local', desc: '諸暨非遺美食，麵條勁道，湯頭濃郁，體驗最純粹的在地工藝。', map: 'https://maps.app.goo.gl/zhuji1' },
-            { id: 2, name: 'O.P.S. Cafe (上海)', category: 'coffee', desc: '魔都特調咖啡天花板，對風味層次有極致追求，需提前預約。', map: 'https://maps.app.goo.gl/opscafe' },
-            { id: 3, name: '老吉士上海菜', category: 'seafood', desc: '道地本幫菜，紅燒肉與蔥烤鰲花魚必點，濃油赤醬的經典。', map: 'https://maps.app.goo.gl/laojishi' },
-            { id: 4, name: '桂語山房 (杭州)', category: 'seafood', desc: '米其林指南推薦，融合茶香的高級杭幫菜，環境極度靜謐。', map: 'https://maps.app.goo.gl/guiyu' },
-            { id: 5, name: '鐵手咖啡製造局 (上海)', category: 'coffee', desc: '環境富有復古質感，手沖豆單豐富，適合對咖啡有品味的你。', map: 'https://maps.app.goo.gl/metalhands' },
-            { id: 6, name: '知味觀 (杭州)', category: 'local', desc: '經典杭州小吃集合地，小籠包、貓耳朵，休閒解饞好去處。', map: 'https://maps.app.goo.gl/zhiweiguan' }
+            { id: 1, name: '老吉士 (天平路創始店)', category: 'benbang', desc: '濃油赤醬的極致，上海本幫菜的傳奇老店。空間擁擠但充滿煙火氣，蔥烤鰲花魚與紅燒肉必點，就在你飯店旁邊！', map: 'https://maps.app.goo.gl/laojishi' },
+            { id: 2, name: '建國328小館', category: 'benbang', desc: '法租界裡的精緻小館，堅持不加味精的本幫菜。蔥油拌麵與心太軟是絕品，深受在地老饕喜愛。', map: 'https://maps.app.goo.gl/ghi789xyz3' },
+            { id: 3, name: '魯馬滋咖啡 (Rumors)', category: 'coffee', desc: '極度安靜且空間微小，主理人嚴格控管品質，堅持法蘭絨濾布手沖單品豆，追求溫潤厚實的風味。', map: 'https://maps.google.com/?cid=18423739596491429224&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ' },
+            { id: 4, name: '一面春風', category: 'local', desc: '能力之內給出一碗好麵。湯頭拒絕任何人工調味，純靠優質菌菇與肉類慢熬，還原食材本味。', map: 'https://maps.google.com/?cid=12817005046636827869&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ' },
+            { id: 5, name: 'O.P.S. Cafe', category: 'coffee', desc: '魔都特調咖啡天花板。不提供座位，只專注於研發前所未見的咖啡風味層次，採嚴格預約制。', map: 'https://maps.app.goo.gl/opscafe' }
         ];
 
         const foodGrid = document.getElementById('foodGrid');
@@ -307,34 +344,40 @@
             const filteredData = filterStr === 'all' ? foodData : foodData.filter(item => item.category === filterStr);
             
             filteredData.forEach(item => {
-                const icon = item.category === 'coffee' ? '☕' : (item.category === 'local' ? '🍜' : '🦐');
+                let icon = '🍽️';
+                if (item.category === 'coffee') icon = '☕';
+                if (item.category === 'local') icon = '🍜';
+                if (item.category === 'benbang') icon = '🥢';
+
+                let categoryName = '';
+                if (item.category === 'coffee') categoryName = '精品單品咖啡';
+                if (item.category === 'benbang') categoryName = '道地本幫菜';
+                if (item.category === 'local') categoryName = '純粹在地小吃';
+
                 const html = `
-                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition">
-                        <div class="text-2xl mb-2">${icon}</div>
-                        <h4 class="font-bold text-lg mb-2">${item.name}</h4>
-                        <p class="text-sm text-slate-600 mb-4 h-12">${item.desc}</p>
-                        <a href="${item.map}" target="_blank" class="inline-block text-blue-600 text-sm font-medium hover:underline bg-blue-50 px-3 py-1 rounded-full">📍 開啟 Google Maps</a>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition">
+                        <div class="text-xs font-bold text-blue-500 uppercase mb-2 tracking-widest flex items-center gap-2">
+                            <span class="text-xl">${icon}</span> ${categoryName}
+                        </div>
+                        <h4 class="text-lg font-bold mb-2 text-slate-800">${item.name}</h4>
+                        <p class="text-sm text-slate-500 mb-6 leading-relaxed h-16">${item.desc}</p>
+                        <a href="${item.map}" target="_blank" class="text-xs text-blue-600 font-medium hover:text-blue-800 underline decoration-blue-200 underline-offset-4">📍 檢視地圖與評論 →</a>
                     </div>
                 `;
                 foodGrid.insertAdjacentHTML('beforeend', html);
             });
         }
 
-        // 初始化美食列表
         renderFood('all');
 
-        // 綁定篩選按鈕事件
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // 更新按鈕樣式
                 filterBtns.forEach(b => {
-                    b.classList.remove('bg-blue-600', 'text-white');
-                    b.classList.add('bg-slate-200', 'text-slate-700');
+                    b.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
+                    b.classList.add('bg-slate-100', 'text-slate-600');
                 });
-                btn.classList.remove('bg-slate-200', 'text-slate-700');
-                btn.classList.add('bg-blue-600', 'text-white');
-                
-                // 重新渲染
+                btn.classList.remove('bg-slate-100', 'text-slate-600');
+                btn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
                 renderFood(btn.getAttribute('data-filter'));
             });
         });
